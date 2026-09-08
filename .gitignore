@@ -1,0 +1,12 @@
+.idea/
+.lineage/
+.nextflow.log*
+.nextflow/
+.nf-test*
+.sendmail*
+.vscode/
+null
+report-*.html
+results*
+work*/
+!workflows/
