@@ -21,10 +21,10 @@ workflow {
     def example_ch = channel.of(
             record(
                 message: """
-                secrets.EMAIL_HOST: ${secrets.EMAIL_HOST ? "set" : "null"}
-                secrets.EMAIL_PORT: ${secrets.EMAIL_PORT ? "set" : "null"}
-                secrets.EMAIL_USER: ${secrets.EMAIL_USER ? "set" : "null"}
-                secrets.EMAIL_PASSWORD: ${secrets.EMAIL_PASSWORD ? "set" : "null"}
+                secrets.EMAIL_HOST: ${{ try { secrets.EMAIL_HOST ? 'set' : 'unset' } catch (_e) { 'unset' } }()}
+                secrets.EMAIL_PORT: ${{ try { secrets.EMAIL_PORT ? 'set' : 'unset' } catch (_e) { 'unset' } }()}
+                secrets.EMAIL_USER: ${{ try { secrets.EMAIL_USER ? 'set' : 'unset' } catch (_e) { 'unset' } }()}
+                secrets.EMAIL_PASSWORD: ${{ try { secrets.EMAIL_PASSWORD ? 'set' : 'unset' } catch (_e) { 'unset' } }()}
 
                 ${params.text}""".stripIndent()
             )
